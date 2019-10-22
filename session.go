@@ -102,7 +102,7 @@ func (s *Session) write(w http.ResponseWriter) error {
 	expiry := s.deadline
 	if s.opts.idleTimeout > 0 {
 		ie := time.Now().Add(s.opts.idleTimeout)
-		if ie.Before(expiry) {
+		if ie.After(expiry) {
 			expiry = ie
 		}
 	}
